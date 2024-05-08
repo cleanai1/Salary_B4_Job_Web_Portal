@@ -1,14 +1,10 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'dart:html' as html;
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-
 import 'package:salary_b4_job_web_portal/utils/constants/const_sizes.dart';
-
 import '../../../utils/constants/const_colors.dart';
 
 class MyResumeCard extends StatefulWidget {
@@ -111,10 +107,19 @@ class _MyResumeCardState extends State<MyResumeCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      margin: const EdgeInsets.only(top: 30),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: whiteColor,
         borderRadius: BorderRadius.circular(10),
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.grey.withOpacity(0.07),
+        //     spreadRadius: 1,
+        //     blurRadius: 5,
+        //     offset: const Offset(0, 5),
+        //   )
+        // ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

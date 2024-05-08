@@ -2,9 +2,6 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'presentation/candidate/homescreen.dart';
-import 'presentation/candidate/register_form.dart';
-import 'presentation/candidate/your_experience.dart';
-import 'presentation/candidate/your_experience_level.dart';
 import 'presentation/splash/splash_screen.dart';
 import 'utils/constants/const_colors.dart';
 

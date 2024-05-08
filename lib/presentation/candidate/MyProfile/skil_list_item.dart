@@ -1,4 +1,8 @@
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_colors.dart';
 
 class SkillsList extends StatefulWidget {
@@ -12,7 +16,8 @@ class SkillsList extends StatefulWidget {
 
 class _SkillsListState extends State<SkillsList> {
   late List<Map<String, dynamic>> skillsDataWithExperience;
-  Map<String, dynamic>? editingSkill; // Initialize editingSkill with null
+  bool isExpanded = false;
+  Map<String, dynamic>? editingSkill; // Track the skill currently being edited
 
   List<String> experienceOptions = [
     '1 Year',
@@ -30,7 +35,6 @@ class _SkillsListState extends State<SkillsList> {
   @override
   void initState() {
     super.initState();
-    // Initialize skills data with default experience for each skill
     skillsDataWithExperience = widget.skills.map((skill) {
       return {
         'number': skill['number']!,
@@ -40,197 +44,262 @@ class _SkillsListState extends State<SkillsList> {
     }).toList();
   }
 
+  // Method to start editing a skill
   void startEditing(Map<String, dynamic> skill) {
     setState(() {
       editingSkill = skill;
     });
   }
 
+  // Method to save changes to a skill
   void saveSkillChanges(Map<String, dynamic> skill) {
     setState(() {
       editingSkill = null; // Exit edit mode
     });
-    // You can save the updated skill data back to your database or perform other actions here
+    // Perform save action (e.g., update database)
     print('Saved changes for ${skill['name']}');
   }
 
+  // Method to delete a skill
   void deleteSkill(Map<String, dynamic> skill) {
     setState(() {
-      skillsDataWithExperience.remove(skill);
+      // Find the index of the skill to delete
+      int indexToDelete =
+          skillsDataWithExperience.indexWhere((s) => s == skill);
+
+      if (indexToDelete != -1) {
+        // Remove the skill at the identified index
+        skillsDataWithExperience.removeAt(indexToDelete);
+      }
+
+      // Alternatively, you can use removeWhere to remove by condition
+      // skillsDataWithExperience.removeWhere((s) => s == skill);
+
+      // Perform delete action (e.g., delete from database)
+      print('Deleted skill: ${skill['name']}');
     });
-    // Perform delete action (e.g., delete from database) here
-    print('Deleted skill: ${skill['name']}');
+  }
+
+  // Method to toggle expanded/collapsed view
+  void toggleExpanded() {
+    setState(() {
+      isExpanded = !isExpanded;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    // Determine the number of displayed skills based on expansion state
+    List<Map<String, dynamic>> displayedSkills = isExpanded
+        ? skillsDataWithExperience
+        : skillsDataWithExperience.sublist(
+            0, min(5, skillsDataWithExperience.length));
+
     return SingleChildScrollView(
       child: Column(
-        children: skillsDataWithExperience.map((skill) {
-          final isEditing = skill == editingSkill;
+        children: [
+          ...displayedSkills.map((skill) {
+            final isEditing = skill == editingSkill;
 
-          return Container(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            margin: const EdgeInsets.only(top: 10),
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 10,
-                  child: Text(
-                    skill['number']!,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
+            return Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              margin: const EdgeInsets.only(top: 10),
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.07),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: Text(
+                      skill['number']!,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 30,
-                  child: isEditing
-                      ? TextFormField(
-                          initialValue: skill['name'],
-                          onChanged: (value) {
-                            skill['name'] = value;
-                          },
-                        )
-                      : Text(
-                          skill['name'],
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                          ),
-                        ),
-                ),
-                const SizedBox(
-                  width: 30,
-                ),
-                Expanded(
-                  flex: 10,
-                  child: Container(
-                    height: 40,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
+                  Expanded(
+                    flex: 30,
                     child: isEditing
-                        ? DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              value: skill['experience'],
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                              onChanged: (value) {
-                                setState(() {
-                                  skill['experience'] = value!;
-                                });
-                              },
-                              items: experienceOptions.map((option) {
-                                return DropdownMenuItem<String>(
-                                  value: option,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    child: Text(option),
-                                  ),
-                                );
-                              }).toList(),
-                              icon: const Icon(
-                                Icons.arrow_drop_down,
+                        ? TextFormField(
+                            initialValue: skill['name'],
+                            onChanged: (value) {
+                              skill['name'] = value;
+                            },
+                          )
+                        : Text(
+                            skill['name'],
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                  ),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: isEditing
+                        ? Container(
+                            height: 40,
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
                                 color: Colors.grey,
+                                width: 1.0,
                               ),
-                              iconSize: 24,
-                              isExpanded: true,
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: skill['experience'],
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                                onChanged: (value) {
+                                  setState(() {
+                                    skill['experience'] = value!;
+                                  });
+                                },
+                                items: experienceOptions.map((option) {
+                                  return DropdownMenuItem<String>(
+                                    value: option,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10.0),
+                                      child: Text(option),
+                                    ),
+                                  );
+                                }).toList(),
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.grey,
+                                ),
+                                iconSize: 24,
+                                isExpanded: true,
+                              ),
                             ),
                           )
-                        : DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              value: skill['experience'],
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                              onChanged: isEditing
-                                  ? (value) {
-                                      setState(() {
-                                        skill['experience'] = value!;
-                                      });
-                                    }
-                                  : null, // Disable onChanged when not editing
-                              items: experienceOptions.map((option) {
-                                return DropdownMenuItem<String>(
-                                  value: option,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0),
-                                    child: Text(option),
-                                  ),
-                                );
-                              }).toList(),
-                              icon: const Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.grey,
-                              ),
-                              iconSize: 24,
-                              isExpanded: true,
+                        // : DropdownButtonHideUnderline(
+                        //     child: DropdownButton<String>(
+                        //       value: skill['experience'],
+                        //       style: const TextStyle(
+                        //         color: Colors.black,
+                        //         fontWeight: FontWeight.bold,
+                        //         fontSize: 12,
+                        //       ),
+                        //       onChanged: isEditing
+                        //           ? (value) {
+                        //               setState(() {
+                        //                 skill['experience'] = value!;
+                        //               });
+                        //             }
+                        //           : null,
+                        //       items: experienceOptions.map((option) {
+                        //         return DropdownMenuItem<String>(
+                        //           value: option,
+                        //           child: Padding(
+                        //             padding: const EdgeInsets.symmetric(
+                        //                 horizontal: 10.0),
+                        //             child: Text(option),
+                        //           ),
+                        //         );
+                        //       }).toList(),
+                        //       icon: const Icon(
+                        //         Icons.arrow_drop_down,
+                        //         color: Colors.grey,
+                        //       ),
+                        //       iconSize: 24,
+                        //       isExpanded: true,
+                        //     ),
+                        //   ),
+                        : Text(
+                            skill['experience'],
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
                             ),
                           ),
                   ),
-                ),
-                const SizedBox(
-                  width: 100,
-                ),
-                Expanded(
-                  flex: 10,
-                  child: isEditing
-                      ? IconButton(
-                          onPressed: () {
-                            saveSkillChanges(skill);
-                          },
-                          icon: const Icon(
-                            Icons.done,
-                            color: Colors.green,
-                          ),
-                        )
-                      : IconButton(
-                          onPressed: () {
-                            startEditing(skill);
-                          },
-                          icon: const Icon(
-                            Icons.edit,
-                            color: Colors.blue,
-                          ),
-                        ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                IconButton(
-                  onPressed: () {
-                    // Implement delete action
-                    deleteSkill(skill);
-                  },
-                  icon: const Icon(
-                    Icons.delete,
-                    color: primaryColor,
+                  const SizedBox(
+                    width: 180,
                   ),
-                ),
-              ],
+                  Expanded(
+                    flex: 5,
+                    child: isEditing
+                        ? CupertinoButton(
+                            padding: const EdgeInsets.all(0),
+                            onPressed: () {
+                              saveSkillChanges(skill);
+                            },
+                            child: const Icon(
+                              Icons.done,
+                              color: Colors.green,
+                            ),
+                          )
+                        : CupertinoButton(
+                            padding: const EdgeInsets.all(0),
+                            onPressed: () {
+                              startEditing(skill);
+                            },
+                            child: const Icon(
+                              FontAwesomeIcons.penToSquare,
+                              color: Colors.blue,
+                              size: 20,
+                            ),
+                          ),
+                  ),
+                  const SizedBox(
+                    width: 0,
+                  ),
+                  CupertinoButton(
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {
+                      deleteSkill(skill);
+                    },
+                    child: const Icon(
+                      CupertinoIcons.delete,
+                      color: primaryColor,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                ],
+              ),
+            );
+          }),
+          const SizedBox(
+            height: 20,
+          ),
+          if (!isExpanded && skillsDataWithExperience.length > 5)
+            TextButton(
+              onPressed: toggleExpanded,
+              child: const Text(
+                'View More Skills',
+                style: TextStyle(color: primaryColor),
+              ),
             ),
-          );
-        }).toList(),
+          if (isExpanded)
+            TextButton(
+              onPressed: toggleExpanded,
+              child: const Text(
+                'Close',
+                style: TextStyle(color: primaryColor),
+              ),
+            ),
+        ],
       ),
     );
   }

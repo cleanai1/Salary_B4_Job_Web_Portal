@@ -51,7 +51,7 @@ class _MySkillsProfilePageState extends State<MySkillsProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: whiteColor,
@@ -63,16 +63,34 @@ class _MySkillsProfilePageState extends State<MySkillsProfilePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "My Skills",
-                style: TextStyle(
-                  color: textSecondary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
+              Row(
+                children: [
+                  const Text(
+                    "My Skills",
+                    style: TextStyle(
+                      color: textSecondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFD6FBFF),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(
+                      skillsData.length.toString(),
+                    ),
+                  ),
+                ],
               ),
               Container(
-                width: 120,
+                width: 150,
                 height: 40,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -92,7 +110,7 @@ class _MySkillsProfilePageState extends State<MySkillsProfilePage> {
                         width: 7,
                       ),
                       Text(
-                        "Add Skills",
+                        "Add Skill",
                         style: TextStyle(
                           color: whiteColor,
                           fontSize: 12,
@@ -110,6 +128,9 @@ class _MySkillsProfilePageState extends State<MySkillsProfilePage> {
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
             child: const Row(
               children: [
+                SizedBox(
+                  width: 25,
+                ),
                 Expanded(
                   flex: 10,
                   child: Text(
@@ -130,9 +151,9 @@ class _MySkillsProfilePageState extends State<MySkillsProfilePage> {
                     ),
                   ),
                 ),
-                SizedBox(width: 30),
+                SizedBox(width: 10),
                 Expanded(
-                  flex: 10,
+                  flex: 18,
                   child: Text(
                     "Experience",
                     style: TextStyle(

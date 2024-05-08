@@ -1,18 +1,17 @@
-import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:salary_b4_job_web_portal/utils/constants/const_colors.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:salary_b4_job_web_portal/utils/constants/const_sizes.dart';
-
+import 'accomplishments_section.dart';
+import 'career_profile_section.dart';
+import 'education_section.dart';
+import 'employment_screen.dart';
+import 'my_certification_section.dart';
 import 'my_resume.dart';
 import 'my_skill_profile_page.dart';
+import 'personal_details_section.dart';
 import 'profile_card.dart';
+import 'projects_section.dart';
+import 'soft_skills_section.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});
@@ -46,6 +45,44 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     height: 30,
                   ),
                   MySkillsProfilePage(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  EmploymentSection(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  MyCertificationSection(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  EducationSection(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  ProjectsSection(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  SoftSkillsSection(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  AccomplishmentsSection(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  CareerProfileSection(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  PersonalDetailsSection(),
+
+//
+////
+                  SizedBox(
+                    height: 50,
+                  ),
                 ],
               ),
             ),
