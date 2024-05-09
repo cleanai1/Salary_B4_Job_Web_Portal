@@ -114,9 +114,9 @@ class _CandidateRegisterFormState extends State<CandidateRegisterForm> {
     if (value.contains(RegExp(r'[^\d]'))) {
       return 'Only digits are allowed';
     }
-    if (!RegExp(r'^[6-9]').hasMatch(value)) {
-      return 'First digit should be between 6 to 9';
-    }
+    // if (!RegExp(r'^[6-9]').hasMatch(value)) {
+    //   return 'First digit should be between 6 to 9';
+    // }
     if (value.length != 10) {
       return 'Phone Number should be 10 digits';
     }

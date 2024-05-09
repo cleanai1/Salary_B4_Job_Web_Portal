@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_colors.dart';
 
+import 'Forms/add_employment_form.dart';
+
 class EmploymentSection extends StatefulWidget {
   const EmploymentSection({super.key});
 
@@ -92,7 +94,14 @@ class _EmploymentSectionState extends State<EmploymentSection> {
                     color: primaryColor),
                 child: CupertinoButton(
                   padding: const EdgeInsets.all(0),
-                  onPressed: () {}, // Toggle form visibility
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const AddEmploymentForm();
+                      },
+                    );
+                  }, // Toggle form visibility
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

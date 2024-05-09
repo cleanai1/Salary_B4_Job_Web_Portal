@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:salary_b4_job_web_portal/utils/constants/const_colors.dart';
 
 Widget buildCommonTextFormField({
   String? labelText,

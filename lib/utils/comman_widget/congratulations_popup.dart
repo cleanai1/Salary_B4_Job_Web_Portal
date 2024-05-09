@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_colors.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_sizes.dart';
 
 class CongratulationsPopup extends StatelessWidget {
   const CongratulationsPopup({super.key});
-
+//
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

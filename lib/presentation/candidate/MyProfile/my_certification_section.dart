@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_sizes.dart';
 import '../../../utils/constants/const_colors.dart';
+import 'Forms/add_certifications_form.dart';
 
 class MyCertificationSection extends StatefulWidget {
   const MyCertificationSection({super.key});
@@ -93,7 +94,14 @@ class _MyCertificationSectionState extends State<MyCertificationSection> {
                     color: primaryColor),
                 child: CupertinoButton(
                   padding: const EdgeInsets.all(0),
-                  onPressed: () {}, // Toggle form visibility
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const AddCertificationForm();
+                      },
+                    );
+                  }, // Toggle form visibility
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

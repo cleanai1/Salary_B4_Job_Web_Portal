@@ -1,11 +1,10 @@
 import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../utils/constants/const_colors.dart';
 import '../../../utils/constants/const_sizes.dart';
+import 'Forms/edit_profile_form.dart';
 
 class ProfileCard extends StatefulWidget {
   const ProfileCard({super.key});
@@ -124,7 +123,14 @@ class _ProfileCardState extends State<ProfileCard> {
                       fontSize: fontSizeSm,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const EditProfileForm();
+                      },
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 30),

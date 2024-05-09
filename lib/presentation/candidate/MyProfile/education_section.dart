@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../utils/constants/const_colors.dart';
+import 'Forms/add_education_form.dart';
 
 class EducationSection extends StatefulWidget {
   const EducationSection({super.key});
@@ -91,7 +92,14 @@ class _EducationSectionState extends State<EducationSection> {
                     color: primaryColor),
                 child: CupertinoButton(
                   padding: const EdgeInsets.all(0),
-                  onPressed: () {}, // Toggle form visibility
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const AddEducationForm();
+                      },
+                    );
+                  }, // Toggle form visibility
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

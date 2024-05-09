@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import '../../utils/constants/const_colors.dart';
 import 'Jobs/jobs.dart';
 import 'MyProfile/my_profile.dart';
