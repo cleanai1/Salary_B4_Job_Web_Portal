@@ -1,4 +1,5 @@
 // Font size
+const fontSize12 = 12.0;
 const fontSizeSm = 14.0;
 const fontSizeMd = 16.0;
 const fontSizeLg = 18.0;

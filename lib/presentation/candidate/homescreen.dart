@@ -1,87 +1,49 @@
 import 'package:flutter/material.dart';
-import '../../utils/constants/const_colors.dart';
-import 'Jobs/jobs.dart';
-import 'MyProfile/my_profile.dart';
 
-class CandidateHomeScreen extends StatefulWidget {
+class CandidateHomeScreen extends StatelessWidget {
   const CandidateHomeScreen({super.key});
-
-  @override
-  State<CandidateHomeScreen> createState() => _CandidateHomeScreenState();
-}
-
-class _CandidateHomeScreenState extends State<CandidateHomeScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
-      body: Column(
-        children: [
-          // Header Section
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5), // Shadow color
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3), // Changes position of shadow
-                ),
-              ],
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            // Fixed header properties
+            floating: true,
+            pinned: true,
+            snap: false,
+            elevation: 0, // No shadow
+            backgroundColor: Colors.white,
+            leading: Image.asset(
+              'assets/images/homeLogo.png', // Path to your logo image asset
+              width: 60,
+              height: 60,
             ),
-            child: Row(
+            title: Row(
               children: [
-                Image.asset(
-                  'assets/images/homeLogo.png', // Path to your logo image asset
-                  width: 60,
-                  height: 60,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/jobs');
+                  },
+                  child: const Text('Jobs'),
                 ),
                 const SizedBox(width: 50),
-
-                // Use Flexible to position TabBar next to the logo
-                Flexible(
-                  flex: 1, // Adjust flex value as needed
-                  child: SizedBox(
-                    width: 220,
-                    child: TabBar(
-                      controller: _tabController,
-                      tabs: const [
-                        Tab(text: 'My Profile'),
-                        Tab(text: 'Jobs'),
-                      ],
-                      indicatorColor: primaryColor,
-                      labelColor: primaryColor,
-                      indicatorWeight: 2,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      unselectedLabelColor: textSecondary,
-                    ),
-                  ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/my_profile');
+                  },
+                  child: const Text('My Profile'),
                 ),
               ],
             ),
           ),
-          // Main Section
-          const SizedBox(height: 30),
-          // Wrap TabBarView in Expanded to take remaining space vertically
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                MyProfileScreen(),
-                JobsScreen(),
+          const SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 30),
+                // Your main content goes here
               ],
             ),
           ),

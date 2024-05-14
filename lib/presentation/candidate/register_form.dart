@@ -182,7 +182,7 @@ class _CandidateRegisterFormState extends State<CandidateRegisterForm> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Candidate",
+                        "",
                         style: TextStyle(
                           fontSize: fontSizeExtraLg,
                           color: primaryColor,
@@ -216,7 +216,7 @@ class _CandidateRegisterFormState extends State<CandidateRegisterForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Register Account",
+                        "Candidate Register Account",
                         style: TextStyle(
                           color: textPrimary,
                           fontWeight: FontWeight.bold,

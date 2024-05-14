@@ -2,35 +2,68 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:salary_b4_job_web_portal/utils/constants/const_colors.dart';
-import 'package:salary_b4_job_web_portal/utils/constants/const_sizes.dart';
+import '../../../../utils/constants/const_colors.dart';
+import '../../../../utils/constants/const_sizes.dart';
 
-class AddPresentationForm extends StatefulWidget {
-  const AddPresentationForm({super.key});
+class ResearchPublicationForm extends StatefulWidget {
+  const ResearchPublicationForm({super.key});
 
   @override
-  State<AddPresentationForm> createState() => _AddPresentationFormState();
+  State<ResearchPublicationForm> createState() =>
+      _ResearchPublicationFormState();
 }
 
-class _AddPresentationFormState extends State<AddPresentationForm> {
-  final TextEditingController titleController = TextEditingController();
+class _ResearchPublicationFormState extends State<ResearchPublicationForm> {
+  final TextEditingController workTitleController = TextEditingController();
   final TextEditingController urlController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  String selectedCDYear = 'Year';
+  String selectedCDMonth = 'Month';
+
+  List<String> yearOptions = [
+    'Year',
+    '2022',
+    '2021',
+    '2020',
+    '2019',
+    '2018',
+    '2017',
+    '2016',
+    // Add more years as needed
+  ];
+
+  List<String> monthOptions = [
+    'Month',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
 
   //Custome validation Register form
-  String? validationErrorTitle = '';
+  String? validationErrorWorkTitle = '';
   String? validationErrorURL = '';
   String? validationErrorDesc = '';
+  String? validationErrorCourseDurationYear = '';
+  String? validationErrorCourseDurationMonth = '';
 
-  String? _titleValidator(String? value) {
+  String? _worktitleValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter title';
+      return 'Please enter work title';
     }
     if (RegExp(r'\s\s+').hasMatch(value)) {
       return 'Only single space is allowed between words';
     }
     if (value.length > 255) {
-      return 'title should be less than 255 characters';
+      return 'Work title should be less than 255 characters';
     }
     return null;
   }
@@ -86,7 +119,7 @@ class _AddPresentationFormState extends State<AddPresentationForm> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'Research Publication/ Journal entry',
+                  'Portfolio',
                   style: TextStyle(
                     color: textPrimary,
                     fontWeight: FontWeight.bold,
@@ -104,7 +137,8 @@ class _AddPresentationFormState extends State<AddPresentationForm> {
               ],
             ),
             const SizedBox(height: 5),
-            const Text("Add links to your publications"),
+            const Text(
+                "Link relevant portfolio/ work samples ( Github, Behance etc.) "),
             const SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,14 +146,14 @@ class _AddPresentationFormState extends State<AddPresentationForm> {
                 SizedBox(
                   height: 40,
                   child: TextFormField(
-                    controller: titleController,
+                    controller: workTitleController,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(
                           256) //or any number you want
                     ],
                     decoration: InputDecoration(
-                      labelText: "Title*",
-                      hintText: "Enter Title",
+                      labelText: "Work Title*",
+                      hintText: "Enter work Title",
                       hintStyle: const TextStyle(
                         color: textTertiary,
                         fontSize: 12,
@@ -129,8 +163,8 @@ class _AddPresentationFormState extends State<AddPresentationForm> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 1,
-                          color: validationErrorTitle == '' ||
-                                  validationErrorTitle == null
+                          color: validationErrorWorkTitle == '' ||
+                                  validationErrorWorkTitle == null
                               ? Colors.grey // Set to red if there is an error
                               : Colors.red.withOpacity(0.5),
                         ),
@@ -151,17 +185,17 @@ class _AddPresentationFormState extends State<AddPresentationForm> {
                         color: textPrimary,
                       ),
                     ),
-                    validator: _titleValidator,
+                    validator: _worktitleValidator,
                     onChanged: (value) async {
                       setState(() {
-                        validationErrorTitle = _titleValidator(value);
+                        validationErrorWorkTitle = _worktitleValidator(value);
                         // Update error message on change
                       });
                     },
                   ),
                 ),
                 Text(
-                  validationErrorTitle ??
+                  validationErrorWorkTitle ??
                       '', // Display the error message conditionally
                   style: const TextStyle(
                     color: Colors.red,
@@ -231,6 +265,172 @@ class _AddPresentationFormState extends State<AddPresentationForm> {
                   style: const TextStyle(
                     color: Colors.red,
                     fontSize: 12.0,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              "Published On",
+              style: TextStyle(
+                color: textPrimary,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+                fontSize: 12,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 40,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            // color: Colors.grey,
+                            color: validationErrorCourseDurationYear == '' ||
+                                    validationErrorCourseDurationYear == null
+                                ? Colors.grey // Set to red if there is an error
+                                : Colors.red.withOpacity(0.5),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            dropdownColor: whiteColor,
+                            value: selectedCDYear,
+                            style: const TextStyle(
+                              color: textPrimary,
+                              fontSize: 12,
+                              letterSpacing: 1,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                selectedCDYear = value!;
+
+                                print('dropdownFloorValue : $selectedCDYear');
+                                if (selectedCDYear != 'Year') {
+                                  validationErrorCourseDurationYear = null;
+                                } else {
+                                  validationErrorCourseDurationYear =
+                                      'Please Select Year';
+                                }
+                              });
+                            },
+                            items: yearOptions.map((option) {
+                              return DropdownMenuItem<String>(
+                                value: option,
+                                child: Text(
+                                  option,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                    letterSpacing: 1,
+                                    color: textPrimary,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: textPrimary,
+                            ),
+                            iconSize: 24,
+                            isExpanded: true,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        validationErrorCourseDurationYear ??
+                            '', // Display the error message conditionally
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 12.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 40,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            // color: Colors.grey,
+                            color: validationErrorCourseDurationMonth == '' ||
+                                    validationErrorCourseDurationMonth == null
+                                ? Colors.grey // Set to red if there is an error
+                                : Colors.red.withOpacity(0.5),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            dropdownColor: whiteColor,
+                            value: selectedCDMonth,
+                            style: const TextStyle(
+                              color: textPrimary,
+                              fontSize: 12,
+                              letterSpacing: 1,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                selectedCDMonth = value!;
+
+                                print('dropdownFloorValue : $selectedCDMonth');
+                                if (selectedCDMonth != 'Month') {
+                                  validationErrorCourseDurationMonth = null;
+                                } else {
+                                  validationErrorCourseDurationMonth =
+                                      'Please Select Month';
+                                }
+                              });
+                            },
+                            items: monthOptions.map((option) {
+                              return DropdownMenuItem<String>(
+                                value: option,
+                                child: Text(
+                                  option,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                    letterSpacing: 1,
+                                    color: textPrimary,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: textPrimary,
+                            ),
+                            iconSize: 24,
+                            isExpanded: true,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        validationErrorCourseDurationMonth ??
+                            '', // Display the error message conditionally
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 12.0,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -317,14 +517,15 @@ class _AddPresentationFormState extends State<AddPresentationForm> {
                     try {
                       int formSubmitStatus = 0;
 
-                      String title = titleController.text.trim();
+                      String worktitle = workTitleController.text.trim();
                       String url = urlController.text.trim();
                       String desc = descriptionController.text.trim();
 
                       // Validation on submit form
-                      if (title.isEmpty || validationErrorTitle != null) {
+                      if (worktitle.isEmpty ||
+                          validationErrorWorkTitle != null) {
                         setState(() {
-                          validationErrorTitle = 'Please enter work title';
+                          validationErrorWorkTitle = 'Please enter work title';
                         });
                         formSubmitStatus = 1;
                       }

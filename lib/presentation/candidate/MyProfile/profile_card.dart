@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../utils/constants/const_colors.dart';
 import '../../../utils/constants/const_sizes.dart';
+import 'Forms/add_portfolio_form.dart';
+import 'Forms/add_presentation_form.dart';
 import 'Forms/edit_profile_form.dart';
+import 'Forms/patent_form.dart';
+import 'Forms/research_publication_form.dart';
 
 class ProfileCard extends StatefulWidget {
   const ProfileCard({super.key});
@@ -130,6 +134,12 @@ class _ProfileCardState extends State<ProfileCard> {
                         return const EditProfileForm();
                       },
                     );
+                    // showDialog(
+                    //   context: context,
+                    //   builder: (BuildContext context) {
+                    //     return const PatentForm();
+                    //   },
+                    // );
                   },
                 ),
               ),

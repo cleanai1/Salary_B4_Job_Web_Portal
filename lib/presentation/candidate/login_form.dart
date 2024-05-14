@@ -75,7 +75,7 @@ class _CandidateLoginFormState extends State<CandidateLoginForm> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Candidate",
+                        "",
                         style: TextStyle(
                           fontSize: fontSizeExtraLg,
                           color: primaryColor,
@@ -109,7 +109,7 @@ class _CandidateLoginFormState extends State<CandidateLoginForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Login",
+                        "Candidate Login",
                         style: TextStyle(
                           color: textPrimary,
                           fontWeight: FontWeight.bold,
@@ -285,12 +285,12 @@ class _CandidateLoginFormState extends State<CandidateLoginForm> {
                               if (registerStatus == 0) {
                                 // All fields are valid, proceed with OTP verification
                                 // showEmailVerificationDialog(context);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text("Login Successfully"),
-                                    backgroundColor: Colors.green,
-                                  ),
-                                );
+                                // ScaffoldMessenger.of(context).showSnackBar(
+                                //   const SnackBar(
+                                //     content: Text("Login Successfully"),
+                                //     backgroundColor: Colors.green,
+                                //   ),
+                                // );
 
                                 Navigator.push(
                                   context,
@@ -300,14 +300,14 @@ class _CandidateLoginFormState extends State<CandidateLoginForm> {
                                   ),
                                 );
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content:
-                                        Text("Please fill correct Information"),
-                                    backgroundColor: Colors.red,
-                                    behavior: SnackBarBehavior.floating,
-                                  ),
-                                );
+                                // ScaffoldMessenger.of(context).showSnackBar(
+                                //   const SnackBar(
+                                //     content:
+                                //         Text("Please fill correct Information"),
+                                //     backgroundColor: Colors.red,
+                                //     behavior: SnackBarBehavior.floating,
+                                //   ),
+                                // );
                                 Navigator.push(
                                   context,
                                   CupertinoPageRoute(

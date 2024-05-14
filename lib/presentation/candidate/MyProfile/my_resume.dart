@@ -107,7 +107,7 @@ class _MyResumeCardState extends State<MyResumeCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-      margin: const EdgeInsets.only(top: 30),
+      // margin: const EdgeInsets.only(top: 30),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: whiteColor,

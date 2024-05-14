@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_colors.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_sizes.dart';
 
+import '../../presentation/candidate/homescreen.dart';
+
 class CongratulationsPopup extends StatelessWidget {
   const CongratulationsPopup({super.key});
 //
@@ -91,7 +93,13 @@ class CongratulationsPopup extends StatelessWidget {
               child: CupertinoButton(
                 padding: const EdgeInsets.all(0),
                 onPressed: () {
-                  Navigator.of(context).pop(); // Close dialog
+                  // Navigator.of(context).pop(); // Close dialog
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const CandidateHomeScreen(),
+                    ),
+                  );
                 },
                 child: const Text(
                   'Got it!',

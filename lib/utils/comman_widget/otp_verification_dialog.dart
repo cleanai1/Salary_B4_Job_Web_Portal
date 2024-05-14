@@ -4,6 +4,8 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_colors.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_sizes.dart';
 
+import '../../presentation/candidate/your_experience.dart';
+
 class OTPVerificationDialog extends StatelessWidget {
   const OTPVerificationDialog({super.key});
 
@@ -92,7 +94,13 @@ class OTPVerificationDialog extends StatelessWidget {
               child: CupertinoButton(
                 padding: const EdgeInsets.all(0),
                 onPressed: () {
-                  Navigator.of(context).pop(); // Close dialog
+                  // Navigator.of(context).pop(); // Close dialog
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const SelectYourExperience(),
+                    ),
+                  );
                 },
                 child: const Text(
                   'Verify',

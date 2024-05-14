@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:salary_b4_job_web_portal/utils/constants/const_sizes.dart';
 
 import '../../../utils/constants/const_colors.dart';
+import 'Forms/add_portfolio_form.dart';
+import 'Forms/add_presentation_form.dart';
+import 'patent_section.dart';
+import 'portfolio_section.dart';
+import 'presentation_section.dart';
+import 'research_publication_section.dart';
 
 class AccomplishmentsSection extends StatelessWidget {
   const AccomplishmentsSection({super.key});
@@ -58,167 +64,188 @@ class AccomplishmentsSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          Column(
+          const Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Portfolio",
-                        style: TextStyle(
-                          color: textPrimary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: fontSizeSm,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Link relevant portfolio/ work samples ( Github, Behance etc.) ",
-                        style: TextStyle(
-                          color: textSecondary,
-                          fontSize: 12,
-                        ),
-                      )
-                    ],
-                  ),
-                  CupertinoButton(
-                    child: const Text(
-                      'Add',
-                      style: TextStyle(color: primaryColor),
-                    ),
-                    onPressed: () {},
-                  )
-                ],
-              ),
-              const SizedBox(height: 0),
-              const Divider(
-                color: textTertiary,
-                thickness: 0,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Research Publication/ Journal entry",
-                        style: TextStyle(
-                          color: textPrimary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: fontSizeSm,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Add links to your publications",
-                        style: TextStyle(
-                          color: textSecondary,
-                          fontSize: 12,
-                        ),
-                      )
-                    ],
-                  ),
-                  CupertinoButton(
-                    child: const Text(
-                      'Add',
-                      style: TextStyle(color: primaryColor),
-                    ),
-                    onPressed: () {},
-                  )
-                ],
-              ),
-              const SizedBox(height: 0),
-              const Divider(
-                color: textTertiary,
-                thickness: 0,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Presentation",
-                        style: TextStyle(
-                          color: textPrimary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: fontSizeSm,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Add links to your presentations",
-                        style: TextStyle(
-                          color: textSecondary,
-                          fontSize: 12,
-                        ),
-                      )
-                    ],
-                  ),
-                  CupertinoButton(
-                    child: const Text(
-                      'Add',
-                      style: TextStyle(color: primaryColor),
-                    ),
-                    onPressed: () {},
-                  )
-                ],
-              ),
-              const SizedBox(height: 0),
-              const Divider(
-                color: textTertiary,
-                thickness: 0,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Patent",
-                        style: TextStyle(
-                          color: textPrimary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: fontSizeSm,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Add links to patents you have filed",
-                        style: TextStyle(
-                          color: textSecondary,
-                          fontSize: 12,
-                        ),
-                      )
-                    ],
-                  ),
-                  CupertinoButton(
-                    child: const Text(
-                      'Add',
-                      style: TextStyle(color: primaryColor),
-                    ),
-                    onPressed: () {},
-                  )
-                ],
-              ),
-              const SizedBox(height: 0),
+              PortfolioSection(),
+              ResearchPublicationSection(),
+              PatentSection(),
+              PresentationSection(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     const Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Text(
+              //           "Portfolio",
+              //           style: TextStyle(
+              //             color: textPrimary,
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: fontSizeSm,
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           height: 5,
+              //         ),
+              //         Text(
+              //           "Link relevant portfolio/ work samples ( Github, Behance etc.) ",
+              //           style: TextStyle(
+              //             color: textSecondary,
+              //             fontSize: 12,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //     CupertinoButton(
+              //       child: const Text(
+              //         'Add',
+              //         style: TextStyle(color: primaryColor),
+              //       ),
+              //       onPressed: () {
+              //         showDialog(
+              //           context: context,
+              //           builder: (BuildContext context) {
+              //             return const AddPortfolioForm();
+              //           },
+              //         );
+              //       },
+              //     )
+              //   ],
+              // ),
+              // const SizedBox(height: 0),
+              // const Divider(
+              //   color: textTertiary,
+              //   thickness: 0,
+              // ),
+              // const SizedBox(height: 20),
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     const Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Text(
+              //           "Research Publication/ Journal entry",
+              //           style: TextStyle(
+              //             color: textPrimary,
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: fontSizeSm,
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           height: 5,
+              //         ),
+              //         Text(
+              //           "Add links to your publications",
+              //           style: TextStyle(
+              //             color: textSecondary,
+              //             fontSize: 12,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //     CupertinoButton(
+              //       child: const Text(
+              //         'Add',
+              //         style: TextStyle(color: primaryColor),
+              //       ),
+              //       onPressed: () {},
+              //     )
+              //   ],
+              // ),
+              // const SizedBox(height: 0),
+              // const Divider(
+              //   color: textTertiary,
+              //   thickness: 0,
+              // ),
+              // const SizedBox(height: 20),
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     const Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Text(
+              //           "Presentation",
+              //           style: TextStyle(
+              //             color: textPrimary,
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: fontSizeSm,
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           height: 5,
+              //         ),
+              //         Text(
+              //           "Add links to your presentations",
+              //           style: TextStyle(
+              //             color: textSecondary,
+              //             fontSize: 12,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //     CupertinoButton(
+              //       child: const Text(
+              //         'Add',
+              //         style: TextStyle(color: primaryColor),
+              //       ),
+              //       onPressed: () {
+              //         showDialog(
+              //           context: context,
+              //           builder: (BuildContext context) {
+              //             return const AddPresentationForm();
+              //           },
+              //         );
+              //       },
+              //     )
+              //   ],
+              // ),
+              // const SizedBox(height: 0),
+              // const Divider(
+              //   color: textTertiary,
+              //   thickness: 0,
+              // ),
+              // const SizedBox(height: 20),
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     const Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Text(
+              //           "Patent",
+              //           style: TextStyle(
+              //             color: textPrimary,
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: fontSizeSm,
+              //           ),
+              //         ),
+              //         SizedBox(
+              //           height: 5,
+              //         ),
+              //         Text(
+              //           "Add links to patents you have filed",
+              //           style: TextStyle(
+              //             color: textSecondary,
+              //             fontSize: 12,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //     CupertinoButton(
+              //       child: const Text(
+              //         'Add',
+              //         style: TextStyle(color: primaryColor),
+              //       ),
+              //       onPressed: () {},
+              //     )
+              //   ],
+              // ),
+              // const SizedBox(height: 0),
               // const Divider(
               //   color: textTertiary,
               //   thickness: 0,
