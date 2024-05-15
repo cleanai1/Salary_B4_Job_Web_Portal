@@ -94,12 +94,13 @@ class CongratulationsPopup extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 onPressed: () {
                   // Navigator.of(context).pop(); // Close dialog
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => const CandidateHomeScreen(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   CupertinoPageRoute(
+                  //     builder: (context) => const CandidateHomeScreen(),
+                  //   ),
+                  // );
+                  Navigator.pushNamed(context, '/my_profile');
                 },
                 child: const Text(
                   'Got it!',

@@ -10,6 +10,7 @@ import 'presentation/candidate/Jobs/job_application_status_screen.dart';
 import 'presentation/candidate/Jobs/job_details_screen.dart';
 import 'presentation/candidate/Jobs/recommended_jobs_screen.dart';
 import 'presentation/candidate/Jobs/saved_jobs_screen.dart';
+import 'presentation/candidate/MyProfile/my_wallet_screen.dart';
 import 'presentation/candidate/homescreen.dart';
 import 'presentation/splash/splash_screen.dart';
 import 'provider/menu_provider.dart';
@@ -52,15 +53,16 @@ class MyApp extends StatelessWidget {
               bodyMedium: const TextStyle(color: textPrimary),
             ),
       ),
-      initialRoute: '/jobs',
+      initialRoute: '/',
       routes: {
-        // '/': (context) => const MyAppBar(),
+        '/': (context) => const SplashScreen(),
         '/jobs': (context) => const JobsScreen(),
         '/my_profile': (context) => const MyProfileScreen(),
         '/recommended_jobs': (context) => const RecommendedJobsScreen(),
         '/job_detail': (context) => const JobDetailScreen(),
         '/saved_jobs': (context) => const SavedJobsScreen(),
         '/application_status': (context) => const JobApplicationStatusScreen(),
+        '/my_wallet': (context) => const MyWalletScreen(),
 
         // Add other routes as needed
       },
